@@ -25,7 +25,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./naloga2/LevelStat_AlexNesovic
+          file: ./naloga2/LevelStat_AlexNesovic/Dockerfile
           push: true
-          tags: uporabnisko_ime/levelstat_alexnesovic:latest,uporabnisko_ime/levelstat_alexnesovic:${{ github.sha }}
+          tags: alexnesovic/levelstat_alexnesovic:latest,alexnesovic/levelstat_alexnesovic:${{ github.sha }}
