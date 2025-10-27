@@ -33,6 +33,5 @@ jobs:
           context: ./naloga2/LevelStat_AlexNesovic
           file: ./naloga2/LevelStat_AlexNesovic/Dockerfile
           push: true
-          tags: |
-            alexnesovic/levelstat_alexnesovic:latest
-            alexnesovic/levelstat_alexnesovic:${{ github.sha }}
+          tags: alexnesovic/levelstat_alexnesovic:latest,alexnesovic/levelstat_alexnesovic:${{ github.sha }}
+      
