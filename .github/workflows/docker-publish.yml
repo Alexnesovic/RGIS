@@ -25,8 +25,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./LevelStat_AlexNesovic
+          file: ./LevelStat_AlexNesovic/Dockerfile
+
           push: true
           tags: |
             alexnesovic/levelstat:latest
