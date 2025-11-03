@@ -35,13 +35,11 @@ jobs:
           push: true
           tags: alexnesovic/levelstat_alexnesovic:latest,alexnesovic/levelstat_alexnesovic:${{ github.sha }}
 
-      - name: Publish
-        run: dotnet publish --configuration Release --no-build ..output "${{ github.workspace }}/publish"
+     
 
-      - name: Deploy to Azure web App
-        uses: azure/webapps-deploy@v2 
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
         with:
-          app-name: "LevelStat_rgis"
+          app-name: 'levelstat-alexnesovic'   # ime tvoje Web App v Azure
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: "${{ github.workspace }}/publish"
-
+          images: 'alexnesovic/levelstat_alexnesovic:latest'
