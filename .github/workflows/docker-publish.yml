@@ -33,5 +33,12 @@ jobs:
           file: ./naloga2/LevelStat_AlexNesovic/LevelStat_AlexNesovic/Dockerfile
           push: true
           tags: alexnesovic/levelstat_alexnesovic:latest,alexnesovic/levelstat_alexnesovic:${{ github.sha }}
+          
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: "Levelstat"   # ime tvoje Web App v Azure
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: "alexnesovic/levelstat_alexnesovic:latest"
 
      
