@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\LevelStat_AlexNesovic.props" />
+</Project>

@@ -1,0 +1,15 @@
+﻿@page
+@model LevelStat_AlexNesovic.Pages.IndexModel
+
+<h1>Dobrodošli v LevelStat</h1>
+
+@if (Model.UserEmail == null)
+{
+    <p>Niste prijavljeni.</p>
+    <a href="/Login">Prijava</a>
+}
+else
+{
+    <p>Prijavljen kot: @Model.UserEmail</p>
+    <a href="/Logout">Odjava</a>
+}

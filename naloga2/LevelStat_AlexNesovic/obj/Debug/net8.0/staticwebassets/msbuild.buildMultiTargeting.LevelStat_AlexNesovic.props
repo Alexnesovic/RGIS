@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\LevelStat_AlexNesovic.props" />
+</Project>
