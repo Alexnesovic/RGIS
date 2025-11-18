@@ -21,4 +21,8 @@ RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "LevelStat_AlexNesovic.dll"]
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
