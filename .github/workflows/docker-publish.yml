@@ -21,14 +21,14 @@ jobs:
 
       # ✅ Restore za app + test projekt (z explicitno potjo)
       - name: Restore (App)
-        run: dotnet restore ./naloga2/LevelStat_AlexNesovic/LevelStat_AlexNesovic.csproj
+        run: dotnet restore ./naloga2/LevelStat_AlexNesovic.csproj
 
       - name: Restore (Tests)
         run: dotnet restore ./Levelstat_test/Levelstat_test.csproj
 
       # ✅ Build za app + test projekt
       - name: Build (App)
-        run: dotnet build ./naloga2/LevelStat_AlexNesovic/LevelStat_AlexNesovic.csproj -c Release --no-restore
+        run: dotnet build ./naloga2/LevelStat_AlexNesovic.csproj -c Release --no-restore
 
       - name: Build (Tests)
         run: dotnet build ./Levelstat_test/Levelstat_test.csproj -c Release --no-restore
