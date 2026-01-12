@@ -1,0 +1,50 @@
+﻿@page
+@using LevelStat_AlexNesovic.Helpers
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var email = HttpContext.Session.GetString("UserEmail");
+    if (string.IsNullOrEmpty(email))
+    {
+        Response.Redirect("/Login");
+    }
+
+    var displayName = HttpContext.Session.GetString("DisplayName") ?? "Uporabnik";
+    var activities = ActivityLog.Get(HttpContext);
+}
+
+<h2>Dashboard</h2>
+
+<p>
+    Pozdravljen, <b>@displayName</b> 👋
+    <br />
+    <small>@email</small>
+</p>
+
+<hr />
+
+<h3>Zadnje aktivnosti</h3>
+
+@if (activities.Count == 0)
+{
+    <p>Ni zabeleženih aktivnosti.</p>
+}
+else
+{
+    <ul>
+        @foreach (var a in activities)
+        {
+            <li>
+                <b>@a.WhenUtc.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</b>
+                — @a.Message
+            </li>
+        }
+    </ul>
+}
+
+<hr />
+
+<p>
+    <a asp-page="/Profile">Uredi profil</a> |
+    <a asp-page="/Logout">Odjava</a>
+</p>

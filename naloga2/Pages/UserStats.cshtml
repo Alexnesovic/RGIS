@@ -1,0 +1,10 @@
+@page
+@model UserStatsModel
+<h2>Statistika uporabnika</h2>
+
+<div>
+    <p><strong>Uporabniško ime:</strong> @Model.Username</p>
+    <p><strong>Število prijav:</strong> @Model.LoginCount</p>
+    <p><strong>Zadnja prijava:</strong> @Model.LastLogin</p>
+    <p><strong>Dokončane naloge:</strong> @Model.CompletedTasks</p>
+</div>

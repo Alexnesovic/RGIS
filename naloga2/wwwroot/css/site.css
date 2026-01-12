@@ -1,0 +1,74 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* --- Dark mode toggle (global) --- */
+:root {
+    --bg: #ffffff;
+    --text: #111111;
+    --card: #f5f5f5;
+    --border: #dddddd;
+    --link: #0b57d0;
+}
+
+[data-theme="dark"] {
+    --bg: #0f1115;
+    --text: #e7e7e7;
+    --card: #171a21;
+    --border: #2a2f3a;
+    --link: #7ab4ff;
+}
+
+html, body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--link);
+}
+
+.card, .container, main, header, footer, .box {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Če uporabljaš kakšne “panele” */
+.panel, .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+/* Inputs */
+input, select, textarea, button {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+button {
+    cursor: pointer;
+}

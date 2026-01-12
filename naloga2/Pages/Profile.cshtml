@@ -1,0 +1,38 @@
+﻿@page
+@model LevelStat_AlexNesovic.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Moj profil";
+}
+
+<h2>Moj profil</h2>
+
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <p style="padding:10px;border:1px solid #2a2f3a;border-radius:10px;">
+        ✅ @Model.SuccessMessage
+    </p>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="padding:10px;border:1px solid #2a2f3a;border-radius:10px;">
+        ❌ @Model.ErrorMessage
+    </p>
+}
+
+<form method="post">
+    <div style="max-width:420px;">
+        <label>Email (samo za prikaz)</label><br />
+        <input value="@Model.Email" disabled /><br /><br />
+
+        <label>Ime</label><br />
+        <input asp-for="DisplayName" required /><br />
+        <span asp-validation-for="DisplayName"></span><br /><br />
+
+        <button type="submit">Shrani</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

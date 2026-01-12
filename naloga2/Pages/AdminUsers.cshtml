@@ -1,0 +1,25 @@
+@page
+@model AdminUsersModel
+<h2>Pregled uporabnikov (Administrator)</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Uporabnik</th>
+            <th>Email</th>
+            <th>Vloga</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var u in Model.Users)
+    {
+        <tr>
+            <td>@u.Username</td>
+            <td>@u.Email</td>
+            <td>@u.Role</td>
+            <td>@(u.Active ? "Aktiven" : "Neaktiven")</td>
+        </tr>
+    }
+    </tbody>
+</table>
