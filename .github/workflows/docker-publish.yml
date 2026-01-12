@@ -13,29 +13,49 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
 
-      # ✅ Restore za app + test projekt (z explicitno potjo)
+      - name: Find projects
+        shell: bash
+        run: |
+          set -e
+
+          # Najdi test csproj v Levelstat_test
+          TEST_CSPROJ=$(find ./Levelstat_test -name "*.csproj" | head -n 1)
+          if [ -z "$TEST_CSPROJ" ]; then
+            echo "ERROR: No test .csproj found under ./Levelstat_test"
+            exit 1
+          fi
+          echo "TEST_CSPROJ=$TEST_CSPROJ" >> $GITHUB_ENV
+
+          # Najdi app csproj v naloga2 (ignoriraj morebitne *test* projekte)
+          APP_CSPROJ=$(find ./naloga2 -name "*.csproj" ! -iname "*test*" | head -n 1)
+          if [ -z "$APP_CSPROJ" ]; then
+            echo "ERROR: No app .csproj found under ./naloga2"
+            exit 1
+          fi
+          echo "APP_CSPROJ=$APP_CSPROJ" >> $GITHUB_ENV
+
+          echo "Found APP:  $APP_CSPROJ"
+          echo "Found TEST: $TEST_CSPROJ"
+
       - name: Restore (App)
-        run: dotnet restore ./naloga2/LevelStat_AlexNesovic.csproj
+        run: dotnet restore "${{ env.APP_CSPROJ }}"
 
       - name: Restore (Tests)
-        run: dotnet restore ./Levelstat_test/Levelstat_test.csproj
+        run: dotnet restore "${{ env.TEST_CSPROJ }}"
 
-      # ✅ Build za app + test projekt
       - name: Build (App)
-        run: dotnet build ./naloga2/LevelStat_AlexNesovic.csproj -c Release --no-restore
+        run: dotnet build "${{ env.APP_CSPROJ }}" -c Release --no-restore
 
       - name: Build (Tests)
-        run: dotnet build ./Levelstat_test/Levelstat_test.csproj -c Release --no-restore
+        run: dotnet build "${{ env.TEST_CSPROJ }}" -c Release --no-restore
 
-      # ✅ Test
       - name: Test
-        run: dotnet test ./Levelstat_test/Levelstat_test.csproj -c Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
+        run: dotnet test "${{ env.TEST_CSPROJ }}" -c Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
 
       - name: Test Report
         uses: dorny/test-reporter@v1
@@ -44,7 +64,6 @@ jobs:
           name: Unit Tests
           path: TestResults/*.trx
           reporter: dotnet-trx
-
 
       
       - name: Set up Docker Buildx
@@ -59,8 +78,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./naloga2
-          file: ./naloga2/Dockerfile
+          context: ./naloga2/LevelStat_AlexNesovic
+          file: ./naloga2/LevelStat_AlexNesovic/Dockerfile
           push: true
           tags: |
             alexnesovic/levelstat_alexnesovic:latest
